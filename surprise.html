@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="icon" href="1000026501-removebg-preview.png">
+<title>For You</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: pink;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        overflow-x: hidden;
+        background-image: radial-gradient(#fff 1px, transparent 1px);
+        background-size: 30px 30px;
+        text-align: center;
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: fixed;
+        width: 16px;
+        height: 16px;
+        background-color: red;
+        transform: rotate(45deg);
+        animation: float 5s linear infinite;
+        z-index: 0;
+    }
+    .heart::before,
+    .heart::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background-color: red;
+        border-radius: 50%;
+    }
+    .heart::before { top: -8px; left: 0; }
+    .heart::after { left: -8px; top: 0; }
+
+    @keyframes float {
+        0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+        100% { transform: translateY(-800px) rotate(45deg); opacity: 0; }
+    }
+
+    #content {
+        display: none;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Question Box */
+    #questionBox {
+        margin-top: 100px;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 20px;
+        border-radius: 15px;
+        display: inline-block;
+        max-width: 90%;
+        z-index: 1;
+        position: relative;
+    }
+    #dateInput {
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        width: 100%;
+        max-width: 250px;
+    }
+    #submitDate {
+        background: #ff4d6d;
+        color: white;
+        padding: 10px 20px;
+        margin-top: 10px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        max-width: 250px;
+    }
+    #submitDate:hover {
+        background: #ff1f4d;
+    }
+
+    /* Cake */
+    .cake {
+        width: 120px;
+        margin: 20px auto;
+        position: relative;
+    }
+    .cake .layer {
+        height: 25px;
+        background-color: #ff9999;
+        border-radius: 10px;
+        margin-top: 5px;
+        animation: bounce 1s infinite alternate;
+    }
+    .cake .candle {
+        width: 8px;
+        height: 30px;
+        background-color: #fff;
+        margin: 0 auto;
+        position: relative;
+    }
+    .cake .flame {
+        width: 8px;
+        height: 8px;
+        background-color: yellow;
+        border-radius: 50%;
+        position: absolute;
+        top: -10px;
+        left: 0;
+        animation: flicker 0.3s infinite alternate;
+    }
+    @keyframes flicker {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.2); }
+    }
+    @keyframes bounce {
+        from { transform: translateY(0); }
+        to { transform: translateY(-5px); }
+    }
+
+    /* Floating Name */
+    .floating-name {
+        position: absolute;
+        font-size: 20px;
+        color: #ff1f4d;
+        font-weight: bold;
+        animation: nameFloat 5s linear forwards;
+        white-space: nowrap;
+        z-index: 2;
+    }
+    @keyframes nameFloat {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-300px); opacity: 0; }
+    }
+
+    /* Letter 💌 */
+    #openLetter {
+        display: none;
+        font-size: 40px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+        animation: fadeIn 1s forwards, pulse 1s infinite;
+        opacity: 0;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    /* Message */
+    #message {
+        display: none;
+        margin: 20px auto;
+        padding: 15px;
+        max-width: 320px;
+        background: #fff;
+        border: 2px solid #ff4d6d;
+        border-radius: 10px;
+        font-size: 16px;
+        text-align: left;
+        word-wrap: break-word;
+        animation: slideDown 0.5s ease;
+    }
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Close button ❤️ */
+    #closeLetter {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 30px;
+        cursor: pointer;
+        margin-top: 10px;
+        animation: pulse 1s infinite;
+    }
+
+    @media (max-width: 500px) {
+        h1 { font-size: 22px; }
+        h2 { font-size: 18px; }
+        #message { font-size: 14px; }
+    }
+</style>
+</head>
+<body>
+
+<!-- Question -->
+<div id="questionBox">
+    <h2>What date did we first meet?</h2>
+    <input type="date" id="dateInput">
+    <br>
+    <button id="submitDate">Submit</button>
+</div>
+
+<!-- Main Content -->
+<div id="content">
+    <h1>🎉 Happy Birthday! 🎉</h1>
+    <div class="cake">
+        <div class="candle">
+            <div class="flame"></div>
+        </div>
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="layer"></div>
+    </div>
+
+    <!-- Letter button (appears after 3s) -->
+    <button id="openLetter">💌</button>
+
+    <!-- Hidden message -->
+    <div id="message">
+        My dearest love,  
+        Today is so special because it’s your day. I just want to remind you how much you mean to me.  
+        You are my sunshine, my safe place, and my favorite person in the whole world.  
+        No matter what life brings, I’ll always be by your side.  
+        Thank you for being you — beautiful, kind, and amazing in every way.  
+        I love you endlessly ❤️  
+    </div>
+
+    <!-- Close button -->
+    <button id="closeLetter">❤️</button>
+</div>
+
+<script>
+    // Floating hearts
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+
+    // Floating name
+    function createFloatingName(name) {
+        const span = document.createElement('span');
+        span.className = 'floating-name';
+        span.innerText = name;
+        span.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+        span.style.top = "80%";
+        document.body.appendChild(span);
+        setTimeout(() => span.remove(), 5000);
+    }
+
+    // Correct date
+    const correctDate = "2025-02-08";
+    const nameToFloat = "Maria ❤️";  // change her name here
+
+    document.getElementById("submitDate").addEventListener("click", function() {
+        let selectedDate = document.getElementById("dateInput").value;
+        if (selectedDate === correctDate) {
+            document.getElementById("questionBox").style.display = "none";
+            document.getElementById("content").style.display = "block";
+            
+            // Show 💌 after 3 seconds
+            setTimeout(() => {
+                document.getElementById("openLetter").style.display = "inline-block";
+            }, 3000);
+
+            // Floating name every 2s
+            setInterval(() => createFloatingName(nameToFloat), 2000);
+        } else {
+            alert("Luh! Nakalimutan mo na.");
+        }
+    });
+
+    // Open letter
+    document.getElementById("openLetter").addEventListener("click", function() {
+        document.getElementById("message").style.display = "block";
+        document.getElementById("closeLetter").style.display = "inline-block";
+        this.style.display = "none";
+    });
+
+    // Close letter
+    document.getElementById("closeLetter").addEventListener("click", function() {
+        document.getElementById("message").style.display = "none";
+        this.style.display = "none";
+        document.getElementById("openLetter").style.display = "inline-block";
+    });
+</script>
+
+</body>
+</html>
