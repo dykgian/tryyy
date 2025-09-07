@@ -17,7 +17,6 @@
         text-align: center;
     }
 
-    /* Floating hearts */
     .heart {
         position: fixed;
         width: 16px;
@@ -51,7 +50,6 @@
         z-index: 1;
     }
 
-    /* Question Box */
     #questionBox {
         margin-top: 100px;
         background: rgba(255, 255, 255, 0.85);
@@ -86,7 +84,6 @@
         background: #ff1f4d;
     }
 
-    /* Cake */
     .cake {
         width: 120px;
         margin: 20px auto;
@@ -125,7 +122,6 @@
         to { transform: translateY(-5px); }
     }
 
-    /* Floating Name */
     .floating-name {
         position: absolute;
         font-size: 20px;
@@ -140,7 +136,6 @@
         100% { transform: translateY(-300px); opacity: 0; }
     }
 
-    /* Letter 💌 */
     #openLetter {
         display: none;
         font-size: 40px;
@@ -160,7 +155,6 @@
         to { opacity: 1; }
     }
 
-    /* Message */
     #message {
         display: none;
         margin: 20px auto;
@@ -179,7 +173,6 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Close button ❤️ */
     #closeLetter {
         display: none;
         background: none;
@@ -199,7 +192,6 @@
 </head>
 <body>
 
-<!-- Question -->
 <div id="questionBox">
     <h2>What date did we first meet?</h2>
     <input type="date" id="dateInput">
@@ -207,9 +199,8 @@
     <button id="submitDate">Submit</button>
 </div>
 
-<!-- Main Content -->
 <div id="content">
-    <h1>🎉 Happy Birthday! 🎉</h1>
+    <h1>🎉 Happy Birthday Maria! 🎉</h1>
     <div class="cake">
         <div class="candle">
             <div class="flame"></div>
@@ -219,25 +210,37 @@
         <div class="layer"></div>
     </div>
 
-    <!-- Letter button (appears after 3s) -->
     <button id="openLetter">💌</button>
 
-    <!-- Hidden message -->
     <div id="message">
-        My dearest love,  
-        Today is so special because it’s your day. I just want to remind you how much you mean to me.  
-        You are my sunshine, my safe place, and my favorite person in the whole world.  
-        No matter what life brings, I’ll always be by your side.  
-        Thank you for being you — beautiful, kind, and amazing in every way.  
-        I love you endlessly ❤️  
+        My dearest Maria, <br> <br>
+        I just want to say, hanggang ngayon I couldn’t imagine na I would fall for you kahit na we only met
+        sa tiktok — we started lang with streaks, sending and sharing videos, talking about random
+        things, tapos one day you told me about your avoidant attachment, you don't celebrate and you don't
+        feel special on your birthday, and that made me curious about your life, kaya mas naging interested
+        ako to know you more. Everyday we talked, you started updating me “I’m home” and I assumed na maybe
+        you wanted me haha kaya I also started updating you. We even had our first call sign “lab” kasi tinanong
+        kita ng “nagkaon kana lab?” and you replied, until naging “love” na siya haha. I still remember nong one
+        morning you told me napanaginipan mo ako na nagchat ako sayo and called you “baby boo,” grabe that made me
+        laugh and kinilig ako! Then dumating yung times na you ghosted me, blocked me, pushed me away, pero kahit
+        ilang beses pa yun, I stayed kasi I understood your avoidant side and I just couldn’t let go. We played cod,
+        roblox, pati minecraft, our day and late night calls, nagphotobooth at nagdate in-game, tumatawa tayo ng sobra,
+        kinantahan pa kita hanggang sa makatulog ka, and all of those moments made me fall deeper for you. Even nong
+        nakita ko yung notes mo na “should I kms,” my heart broke, I prayed for you, and I knew I wanted to be the one
+        who listens and stays. Kahit ilang ulit mo akong pinush away, I always waited kasi alam ko sa puso ko it’s you.
+        Maria, lahat ng memories natin, lahat ng sinabi mo, all the laughs, even the silence — that's the reasons why
+        I love you and why I choose you everyday. Kaya ngayon, ayokong ma-stuck tayo dito lang, I want us to grow and
+        have something real, yung may label na, yung may karapatan na akong magselos hahaha, at pwede na kitang ipagmayabang.
+        Kaya Maria, with all my heart, may I court you? I want a future with you, to call you mine, and to love you as my
+        first and last love. Happy Birthday, Maria! Even if I’m not beside you today, I hope you feel my love and presence — kasi
+        as long as I’m here, you’ll never feel unloved or unseen. You’re everything I wanted, and everything I’ll always choose. I love you forever, Maria.
     </div>
 
-    <!-- Close button -->
     <button id="closeLetter">❤️</button>
 </div>
 
 <script>
-    // Floating hearts
+    
     function createHeart() {
         const heart = document.createElement('div');
         heart.className = 'heart';
@@ -248,7 +251,6 @@
     }
     setInterval(createHeart, 300);
 
-    // Floating name
     function createFloatingName(name) {
         const span = document.createElement('span');
         span.className = 'floating-name';
@@ -259,9 +261,8 @@
         setTimeout(() => span.remove(), 5000);
     }
 
-    // Correct date
     const correctDate = "2025-02-08";
-    const nameToFloat = "Maria ❤️";  // change her name here
+    const nameToFloat = "I ❤️ You Maria";
 
     document.getElementById("submitDate").addEventListener("click", function() {
         let selectedDate = document.getElementById("dateInput").value;
@@ -269,26 +270,22 @@
             document.getElementById("questionBox").style.display = "none";
             document.getElementById("content").style.display = "block";
             
-            // Show 💌 after 3 seconds
             setTimeout(() => {
                 document.getElementById("openLetter").style.display = "inline-block";
             }, 3000);
 
-            // Floating name every 2s
             setInterval(() => createFloatingName(nameToFloat), 2000);
         } else {
             alert("Luh! Nakalimutan mo na.");
         }
     });
 
-    // Open letter
     document.getElementById("openLetter").addEventListener("click", function() {
         document.getElementById("message").style.display = "block";
         document.getElementById("closeLetter").style.display = "inline-block";
         this.style.display = "none";
     });
 
-    // Close letter
     document.getElementById("closeLetter").addEventListener("click", function() {
         document.getElementById("message").style.display = "none";
         this.style.display = "none";
@@ -298,3 +295,4 @@
 
 </body>
 </html>
+
